@@ -1,0 +1,196 @@
+.fullpage3 {
+    /* background-image: url('https://rent-car.app/uploads/filemanager/why-kei-8e2gal_GIE8-unsplash%20(1).jpg'); */
+    /* background-color: rgb(255, 255, 255); */
+    background: "linear-gradient(180deg, #2af598 0%, #009efd 100%)";
+    background-size: cover;
+    background-size: 100% auto; /* Set height to 100% and maintain aspect ratio */
+    margin: 0; /* Remove default body margin */
+    padding: 0;
+}
+
+/* Styles for the car booking form */
+
+.car-booking-container {
+    font-family: "Times New Roman", Times, serif;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(245, 223, 223, 0.9); /* Transparent white background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Limit width for better readability */
+    margin-top: 3%;
+    margin-left: 35%;
+    margin-bottom: 3%;
+}
+
+.car-booking-title {
+    text-align: center;
+    color: #333;
+}
+
+.car-booking-form {
+    margin-top: 20px;
+}
+
+.car-booking-group {
+    margin-bottom: 20px;
+}
+
+.car-booking-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.car-booking-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    font-size: 16px;
+}
+
+.car-booking-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    margin-left: 43%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}
+
+.car-booking-button:hover {
+    background-color: #0056b3;
+}
+
+.book-car-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.book-car-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.book-car-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.book-car-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.form-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.input-icon {
+    margin-right: 0.5rem;
+    color: #007bff;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .book-car-container {
+        padding: 1rem;
+    }
+
+    .book-car-header h1 {
+        font-size: 2rem;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+    }
+}
+
+.car-image-container {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.car-preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.car-details {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.car-details h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.car-details p {
+    margin: 0;
+    color: #666;
+    font-size: 1.1rem;
+}
