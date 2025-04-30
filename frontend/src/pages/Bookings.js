@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../components/Navbar';
+import { FaCar, FaCalendarAlt, FaClock, FaIdCard, FaTimesCircle, FaCheckCircle } from 'react-icons/fa';
 
 const Bookings = () => {
     const [bookingsArray, setBookingsArray] = useState([]);
@@ -43,7 +44,6 @@ const Bookings = () => {
 
             if (response.ok) {
                 toast.success('Booking cancelled successfully');
-                // Refresh the bookings list
                 fetchBookings();
             } else {
                 toast.error('Failed to cancel booking');
@@ -55,50 +55,75 @@ const Bookings = () => {
 
     return (
         <div className="page-container">
-             <Navbar />
-
+            <Navbar />
             <div className="bookings-container">
-                <h1 className="bookings-title">My Bookings</h1>
+                <div className="bookings-header">
+                    <h1 className="bookings-title">
+                        <FaCar className="header-icon" /> My Bookings
+                    </h1>
+                    <p className="bookings-subtitle">Manage your car rental reservations</p>
+                </div>
+
                 {bookingsArray.length === 0 ? (
                     <div className="no-bookings">
-                        <p>You don't have any bookings yet.</p>
-                        <a href="/Bookcar" className="book-now-link">Book a Car Now</a>
+                        <div className="no-bookings-content">
+                            <FaCar className="no-bookings-icon" />
+                            <h2>No Active Bookings</h2>
+                            <p>You don't have any active car rentals at the moment.</p>
+                            <a href="/Bookcar" className="book-now-button">
+                                <FaCar className="button-icon" /> Book a Car Now
+                            </a>
+                        </div>
                     </div>
                 ) : (
                     <div className="bookings-grid">
                         {bookingsArray.map((booking) => (
                             <div className="booking-card" key={booking._id}>
-                                <div className="booking-image">
-                                    <img src={booking.Carimg} alt={booking.Name} />
+                                <div className="booking-image-container">
+                                    <img src={booking.Carimg} alt={booking.Name} className="booking-image" />
+                                    <div className="booking-status-badge">
+                                        <FaCheckCircle className="status-icon" />
+                                        <span>Confirmed</span>
+                                    </div>
                                 </div>
                                 <div className="booking-details">
                                     <h3 className="booking-car-name">{booking.Name}</h3>
                                     <div className="booking-info">
                                         <div className="info-item">
-                                            <span className="info-label">Date</span>
-                                            <span className="info-value">{new Date(booking.Date).toLocaleDateString()}</span>
+                                            <FaCalendarAlt className="info-icon" />
+                                            <div className="info-content">
+                                                <span className="info-label">Booking Date</span>
+                                                <span className="info-value">{new Date(booking.Date).toLocaleDateString()}</span>
+                                            </div>
                                         </div>
                                         <div className="info-item">
-                                            <span className="info-label">Check-in Time</span>
-                                            <span className="info-value">{booking.CheckinTime}</span>
+                                            <FaClock className="info-icon" />
+                                            <div className="info-content">
+                                                <span className="info-label">Check-in Time</span>
+                                                <span className="info-value">{booking.CheckinTime}</span>
+                                            </div>
                                         </div>
                                         <div className="info-item">
-                                            <span className="info-label">Duration</span>
-                                            <span className="info-value">{booking.Hours} hours</span>
+                                            <FaClock className="info-icon" />
+                                            <div className="info-content">
+                                                <span className="info-label">Duration</span>
+                                                <span className="info-value">{booking.Hours} hours</span>
+                                            </div>
                                         </div>
                                         <div className="info-item">
-                                            <span className="info-label">Registration No</span>
-                                            <span className="info-value">{booking.Regno}</span>
+                                            <FaIdCard className="info-icon" />
+                                            <div className="info-content">
+                                                <span className="info-label">Registration No</span>
+                                                <span className="info-value">{booking.Regno}</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="booking-actions">
-                                        <div className="booking-status">
-                                            <span className="status-badge">Confirmed</span>
-                                        </div>
                                         <button 
                                             className="cancel-button"
                                             onClick={() => handleCancelBooking(booking._id)}
                                         >
+                                            <FaTimesCircle className="button-icon" />
                                             Cancel Booking
                                         </button>
                                     </div>

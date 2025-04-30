@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaCar } from 'react-icons/fa';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
@@ -27,7 +28,13 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="navbar-container">
                 <div className="brand-section">
-                    <Link to="/" className="brand-title">CarHub</Link>
+                    <Link to="/" className="brand-logo">
+                        <FaCar className="logo-icon" />
+                        <div className="logo-text">
+                            <span className="logo-car">Car</span>
+                            <span className="logo-hub">Hub</span>
+                        </div>
+                    </Link>
                 </div>
                 <div className="navbar-links">
                     <ul>
