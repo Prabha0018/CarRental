@@ -3,7 +3,12 @@ import Cars from '../models/Carmodel.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const MONGO_URI = "mongodb+srv://prabhakarans2022cse:Prabha45@prabha.geayet5.mongodb.net/carhub?retryWrites=true&w=majority&appName=Prabha"
+const MONGO_URI = process.env.MONGODB_URI;
+
+if (!MONGO_URI) {
+    console.error('MONGODB_URI is not defined in environment variables');
+    process.exit(1);
+}
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -15,7 +20,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
                 Color: 'Blue',
                 Rate: 800000,
                 Regno: 'KA03EF9012',
-                Carimg: 'https://example.com/tata_nexon.jpg'
+                Carimg: 'https://th.bing.com/th/id/OIP.Ld6Fry4rdRaLeIeH4EZgYQHaEK?rs=1&pid=ImgDetMain'
               },
               {
                 Name: 'Maruti Suzuki Swift',
@@ -23,7 +28,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
                 Color: 'Red',
                 Rate: 650000,
                 Regno: 'DL05GH2345',
-                Carimg: 'https://example.com/maruti_swift.jpg'
+                Carimg: 'https://th.bing.com/th/id/OIP.YoB_JQjPvdiRS9m-DwuPfAHaEc?w=295&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7'
               },
               {
                 Name: 'Hyundai i20',
@@ -39,7 +44,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
                 Color: 'Silver',
                 Rate: 900000,
                 Regno: 'MH12KL3456',
-                Carimg: 'https://example.com/honda_city.jpg'
+                Carimg: 'https://th.bing.com/th/id/OIP.VJqC5FHdnr888sGzXaRDlwHaEK?w=313&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7'
               },
               // Add more cars here
               {
@@ -56,7 +61,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
                 Color: 'Grey',
                 Rate: 1500000,
                 Regno: 'AP08OP6789',
-                Carimg: 'https://example.com/toyota_innova_crysta.jpg'
+                Carimg: 'https://th.bing.com/th/id/R.8515fd008ac46dfe8bd953b91c7a0bb8?rik=x%2fiAR6u8DGFvkg&riu=http%3a%2f%2fpics.desigoogly.com%2fvar%2falbums%2fCars%2fToyota-Innova-Crysta%2fToyota+Innova+Crysta+Grey+Color.PNG%3fm%3d1549150653&ehk=y7pblHpdZIkokEEQU6YyGX8%2f4pk43S6Zx9csU%2baSdZ8%3d&risl=&pid=ImgRaw&r=0'
               },
               {
                 Name: 'Ford EcoSport',
