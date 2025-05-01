@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import cors from 'cors'
 import DBConnector from "../config/dbconnector.js"
 import CarRoute from '../routes/CarRoutes.js'
-import authRoutes from '../Routes/auth.js'
+import authRoutes from '../routes/auth.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
