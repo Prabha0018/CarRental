@@ -4,7 +4,7 @@ import '../styles/Addcar.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../components/Navbar';
-import { FaCar, FaKey } from 'react-icons/fa';
+import { FaCar, FaKey, FaArrowLeft } from 'react-icons/fa';
 import { useState } from 'react';
 
 const Addcar = () => {
@@ -169,7 +169,24 @@ const Addcar = () => {
                 <ToastContainer />
                 <div className="passkey-popup">
                     <div className="passkey-popup-content">
-                        <h2>Enter Passkey</h2>
+                        <div className="passkey-header">
+                            <button 
+                                className="back-button" 
+                                onClick={() => window.history.back()}
+                                style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    fontSize: '20px',
+                                    color: '#333',
+                                    padding: '5px',
+                                    marginRight: '10px'
+                                }}
+                            >
+                                <FaArrowLeft />
+                            </button>
+                            <h2>Enter Passkey</h2>
+                        </div>
                         <div className="form-group">
                             <label>
                                 <FaKey className="input-icon" />
