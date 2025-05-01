@@ -9,10 +9,19 @@ import { FaCar, FaCalendarAlt, FaClock, FaIdCard, FaTimesCircle, FaCheckCircle }
 
 const Bookings = () => {
     const [bookingsArray, setBookingsArray] = useState([]);
+    const [userInfo, setUserInfo] = useState(null);
 
-    const fetchBookings = async () => {
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            setUserInfo(user);
+            fetchUserBookings(user.id);
+        }
+    }, []);
+
+    const fetchUserBookings = async (userId) => {
         try {
-            const response = await fetch('http://localhost:4004/api/allbooks', {
+            const response = await fetch(`http://localhost:4004/api/bookings/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,10 +38,6 @@ const Bookings = () => {
         } 
     };
 
-    useEffect(() => {
-        fetchBookings();
-    }, []);
-
     const handleCancelBooking = async (bookingId) => {
         try {
             const response = await fetch(`http://localhost:4004/api/cancelbook/${bookingId}`, {
@@ -44,7 +49,9 @@ const Bookings = () => {
 
             if (response.ok) {
                 toast.success('Booking cancelled successfully');
-                fetchBookings();
+                if (userInfo) {
+                    fetchUserBookings(userInfo.id);
+                }
             } else {
                 toast.error('Failed to cancel booking');
             }

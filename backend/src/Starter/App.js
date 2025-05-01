@@ -4,6 +4,8 @@ import cors from 'cors'
 import DBConnector from "../config/dbconnector.js"
 import CarRoute from '../routes/CarRoutes.js'
 import authRoutes from '../routes/auth.js'
+import contactRoutes from '../routes/contact.js'
+import bookingRoutes from '../routes/BookingRoutes.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -37,8 +39,10 @@ app.get('/health', (req, res) => {
 });
 
 // Routes
-app.use("/api/", CarRoute)
+app.use("/api", CarRoute)
 app.use("/api/auth", authRoutes)
+app.use("/api/contact", contactRoutes)
+app.use("/api", bookingRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server running on Port ${PORT}`)

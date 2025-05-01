@@ -17,7 +17,7 @@ const Signin = () => {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:4004/api/auth/signin', {
+            const response = await fetch('https://carrental-r6zl.onrender.com/api/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,13 +35,13 @@ const Signin = () => {
             localStorage.setItem('user', JSON.stringify(data.user));
             
             toast.success('Sign in successful!');
-            navigate('/Home');
+            navigate('/');
         } catch (error) {
             setError(error.message);
             toast.error(error.message);
         } finally {
             setLoading(false);
-        }
+        } 
     };
 
     return (

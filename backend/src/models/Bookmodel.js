@@ -7,7 +7,9 @@ const BookingSchema = new mongoose.Schema({
     Hours: Number,
     Date: Date,
     CheckinTime: String,
-    Aadhar: String
+    Aadhar: String,
+    userId: String,
+    userEmail: String
 }, {
     timestamps: true
 });

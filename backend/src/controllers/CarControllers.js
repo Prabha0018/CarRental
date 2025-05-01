@@ -147,4 +147,14 @@ const uploadImage = (req, res) => {
     });
 };
 
+export const verifyPasskey = async (req, res) => {
+    const { passkey } = req.body;
+
+    if (!passkey || passkey !== '123456') {
+        return res.status(401).json({ error: 'Invalid passkey' });
+    }
+
+    res.status(200).json({ message: 'Passkey verified successfully' });
+};
+
 export { getcars, createcar, createbook, getbooks, cancelbook, getCarByRegNo, uploadImage };

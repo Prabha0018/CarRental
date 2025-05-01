@@ -7,6 +7,7 @@ import Bookings from './pages/Bookings.js';
 import Bookcar from './pages/Bookcar.js';
 import SignIn from './pages/SignIn.jsx';
 import SignUp from './pages/SignUp.jsx';
+import Contact from './pages/Contact.jsx';
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -30,11 +31,8 @@ const App = () => {
                 <Routes>
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/" element={
-                        
-                            <Home />
-                       
-                    } />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/home" element={
                         <ProtectedRoute>
                             <Home />

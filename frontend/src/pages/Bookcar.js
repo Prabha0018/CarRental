@@ -12,10 +12,18 @@ const Bookcar = () => {
     const [searchParams] = useSearchParams();
     const [carImage, setCarImage] = useState('');
     const [carDetails, setCarDetails] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            setUserInfo(user);
+        }
+    }, []);
 
     const fetchCarDetails = async (regno) => {
         try {
-            const response = await fetch(`http://localhost:4004/api/car/${regno}`);
+            const response = await fetch(`https://carrental-r6zl.onrender.com/api/car/${regno}`);
             if (response.ok) {
                 const data = await response.json();
                 setCarDetails(data);
@@ -58,6 +66,11 @@ const Bookcar = () => {
     };
 
     const bookbtnclick = async() => {
+        if (!userInfo) {
+            toast.error('Please sign in to book a car');
+            return;
+        }
+
         const Regno = document.getElementById('regno').value;
         const Hours = document.getElementById('hours').value;
         const Date = document.getElementById('date').value;
@@ -80,7 +93,15 @@ const Bookcar = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ Regno, Hours, Date, CheckinTime, Aadhar }),
+                body: JSON.stringify({ 
+                    Regno, 
+                    Hours, 
+                    Date, 
+                    CheckinTime, 
+                    Aadhar,
+                    userId: userInfo.id,
+                    userEmail: userInfo.email
+                }),
             });
 
             if (response.ok) {

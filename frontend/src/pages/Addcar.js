@@ -4,7 +4,7 @@ import '../styles/Addcar.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../components/Navbar';
-import { FaCar } from 'react-icons/fa';
+import { FaCar, FaKey } from 'react-icons/fa';
 import { useState } from 'react';
 
 const Addcar = () => {
@@ -13,6 +13,30 @@ const Addcar = () => {
     const [imagePreview, setImagePreview] = useState(null);
     const [isFileUpload, setIsFileUpload] = useState(true);
     const [imageUrl, setImageUrl] = useState('');
+    const [showPasskeyPopup, setShowPasskeyPopup] = useState(true);
+    const [passkey, setPasskey] = useState('');
+
+    const verifyPasskey = async () => {
+        try {
+            const response = await fetch('http://localhost:4004/api/verify-passkey', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ passkey }),
+            });
+
+            if (response.ok) {
+                setShowPasskeyPopup(false);
+            } else {
+                const errorData = await response.json();
+                toast.error(errorData.error || 'Invalid passkey');
+            }
+        } catch (error) {
+            toast.error('Error verifying passkey');
+            console.error('Error:', error);
+        }
+    };
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -74,6 +98,7 @@ const Addcar = () => {
                 // Upload the image if file is selected
                 const formData = new FormData();
                 formData.append('carImage', selectedFile);
+                formData.append('passkey', passkey);
 
                 const imageUploadResponse = await fetch('http://localhost:4004/api/upload', {
                     method: 'POST',
@@ -81,7 +106,8 @@ const Addcar = () => {
                 });
 
                 if (!imageUploadResponse.ok) {
-                    throw new Error('Failed to upload image');
+                    const errorData = await imageUploadResponse.json();
+                    throw new Error(errorData.error || 'Failed to upload image');
                 }
 
                 const { imageUrl: uploadedImageUrl } = await imageUploadResponse.json();
@@ -100,7 +126,8 @@ const Addcar = () => {
                     Year, 
                     Color, 
                     Regno, 
-                    Carimg: finalImageUrl 
+                    Carimg: finalImageUrl,
+                    passkey 
                 }),
             });
 
@@ -126,25 +153,56 @@ const Addcar = () => {
                     setImageUrl('');
                 }
             } else {
-                const errorMessage = await response.text();
-                if (errorMessage === 'Car Already Exists') {
-                    toast.error('Car Already Exists');
-                } else {
-                    toast.error('Some problem occurred. Please try again later.');
-                }
+                const errorData = await response.json();
+                toast.error(errorData.error || 'Failed to add car');
             }
         } catch (error) {
-            toast.error('Error occurred while processing your request. Please try again later.');
+            toast.error(error.message || 'Error occurred while processing your request');
             console.error('Error:', error);
         }
     };
 
+    if (showPasskeyPopup) {
+        return (
+            <div className="page-container">
+                <Navbar />
+                <ToastContainer />
+                <div className="passkey-popup">
+                    <div className="passkey-popup-content">
+                        <h2>Enter Passkey</h2>
+                        <div className="form-group">
+                            <label>
+                                <FaKey className="input-icon" />
+                                Passkey
+                            </label>
+                            <input 
+                                type="password" 
+                                value={passkey}
+                                onChange={(e) => setPasskey(e.target.value)}
+                                placeholder="Enter passkey"
+                                required
+                            />
+                        </div>
+                        <p className="passkey-note">
+                            If you need passkey, <a href="/contact" className="contact-link">contact us</a>
+                        </p>
+                        <button onClick={verifyPasskey} className="submit-button">
+                            Verify
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="page-container">
             <Navbar />
+            <ToastContainer />
             <div className="add-car-container">
-                <div className="add-car-header">
-                    <h1>Add New Car</h1>
+                <div className="book-car-header">
+                    <h1>Add Your Car</h1>
+                    <p>Fill in the details below to Add your vehicle</p>
                 </div>
                 <div className="form-container">
                     <div className="form-wrapper">
@@ -198,19 +256,6 @@ const Addcar = () => {
                             <div className="form-group">
                                 <label>
                                     <FaCar className="input-icon" />
-                                    Rate per Day
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="rate" 
-                                    placeholder="Enter rental rate"
-                                    required
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label>
-                                    <FaCar className="input-icon" />
                                     Registration Number
                                 </label>
                                 <input 
@@ -224,24 +269,36 @@ const Addcar = () => {
                             <div className="form-group">
                                 <label>
                                     <FaCar className="input-icon" />
-                                    Car Image
+                                    Rate per Hour
                                 </label>
+                                <input 
+                                    type="number" 
+                                    id="rate" 
+                                    placeholder="Enter rate per hour"
+                                    required
+                                    min="1"
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Car Image</label>
                                 <div className="image-input-toggle">
                                     <button 
-                                        type="button" 
+                                        type="button"
                                         className={`toggle-button ${isFileUpload ? 'active' : ''}`}
                                         onClick={() => setIsFileUpload(true)}
                                     >
                                         Upload File
                                     </button>
                                     <button 
-                                        type="button" 
+                                        type="button"
                                         className={`toggle-button ${!isFileUpload ? 'active' : ''}`}
                                         onClick={() => setIsFileUpload(false)}
                                     >
                                         Image URL
                                     </button>
                                 </div>
+
                                 {isFileUpload ? (
                                     <div className="file-input-wrapper">
                                         <div className="file-input-container">
@@ -272,18 +329,13 @@ const Addcar = () => {
                                 )}
                             </div>
 
-                            <button 
-                                type="button" 
-                                onClick={submitntnclick} 
-                                className="submit-button"
-                            >
+                            <button type="button" onClick={submitntnclick} className="submit-button">
                                 Add Car
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-            <ToastContainer position="top-right" autoClose={3000} />
         </div>
     );
 };

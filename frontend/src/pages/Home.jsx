@@ -11,7 +11,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:4004/api/allcars', {
+                const response = await fetch('https://carrental-r6zl.onrender.com/api/allcars', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
