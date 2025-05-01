@@ -33,7 +33,7 @@ const Contact = () => {
         e.preventDefault();
         
         try {
-            const response = await fetch('http://localhost:4004/api/contact/send-email', {
+            const response = await fetch('https://carrental-r6zl.onrender.com/api/contact/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 4004;
 
 // CORS configuration
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: [process.env.FRONTEND_URL || 'http://localhost:3000', 'https://car-hub-rent.netlify.app'],
     credentials: true,
     optionSuccessStatus: 200
 };

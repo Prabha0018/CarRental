@@ -18,7 +18,7 @@ const Addcar = () => {
 
     const verifyPasskey = async () => {
         try {
-            const response = await fetch('http://localhost:4004/api/verify-passkey', {
+            const response = await fetch('https://carrental-r6zl.onrender.com/api/verify-passkey', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const Addcar = () => {
                 formData.append('carImage', selectedFile);
                 formData.append('passkey', passkey);
 
-                const imageUploadResponse = await fetch('http://localhost:4004/api/upload', {
+                const imageUploadResponse = await fetch('https://carrental-r6zl.onrender.com/api/upload', {
                     method: 'POST',
                     body: formData,
                 });
@@ -115,7 +115,7 @@ const Addcar = () => {
             }
 
             // Create the car with the image URL
-            const response = await fetch('http://localhost:4004/api/createcar', {
+            const response = await fetch('https://carrental-r6zl.onrender.com/api/createcar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

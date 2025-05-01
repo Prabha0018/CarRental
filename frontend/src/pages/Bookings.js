@@ -21,7 +21,7 @@ const Bookings = () => {
 
     const fetchUserBookings = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:4004/api/bookings/${userId}`, {
+            const response = await fetch(`https://carrental-r6zl.onrender.com/api/bookings/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const Bookings = () => {
 
     const handleCancelBooking = async (bookingId) => {
         try {
-            const response = await fetch(`http://localhost:4004/api/cancelbook/${bookingId}`, {
+            const response = await fetch(`https://carrental-r6zl.onrender.com/api/cancelbook/${bookingId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
